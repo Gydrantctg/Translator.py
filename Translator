@@ -1,0 +1,63 @@
+from googletrans import Translator
+from telebot import types
+from telebot import TeleBot
+import asyncio
+
+tg_token = "7535645689:AAHKu2a51HQVesP9iljvQxQWlqJ0izdxrHY"
+bot = TeleBot(tg_token)
+
+@bot.message_handler(commands=['start'])
+def start_mes(message):
+    bot.send_message(message.chat.id, f'Этот бот позволяет переводить текст! Введите /translate для перевода')
+
+def translate_language(message):
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    markup.row("Русский", "Английский")
+    return markup
+
+
+@bot.message_handler(func=lambda message:True)
+def choose_launguage(message):
+    chat_id = message.chat.id
+
+    try:
+        if message.text == "Русский":
+            bot.send_message(chat_id, text=f'Напишите что вы хотите перевести')
+            bot.register_next_step_handler(message, ru_text)
+        elif message.text == "Английский":
+            bot.send_message(chat_id, text=f'Напишите, что вы хотите перевести! Напишите /stop если закончите')
+            bot.register_next_step_handler(message, eng_text)
+        elif message.text != "Русский" and message.text != "Английский":
+            raise ValueError("Выберите только русский и английский язык!")
+    except ValueError:
+        bot.send_message(chat_id, f'Выберите только русский или английский язык')
+
+@bot.message_handler(commands=['translate'])
+def translate(message):
+    bot.send_message(message.chat.id, text=f'Выберите язык, на который вы хотите перевести',
+                    reply_markup=translate_language(message))
+    bot.register_next_step_handler(message, choose_launguage)
+
+def eng_text(message):
+    async def translate_text():
+        async with Translator() as translator:
+            text = message.text
+            result = await translator.translate(text, dest='en')
+            bot.send_message(message.chat.id, result.text)
+
+    asyncio.run(translate_text())
+
+def ru_text(message):
+    async def translate_text():
+        async with Translator() as translator:
+            text = message.text
+            result = await translator.translate(text, dest='ru')
+            bot.send_message(message.chat.id, result.text)
+
+    asyncio.run(translate_text())
+    
+
+
+
+
+bot.polling()
