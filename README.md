@@ -12,4 +12,4 @@
 - <a href="https://docs.python.org/3/library/asyncio.html" title="Документация библиотеки Asyncio">Asyncio</a>
 - <a href="https://pypi.org/project/pyTelegramBotAPI/" title="Документация библиотеки 
  Telebot">Telebot</a>
-- <a href = "https://py-googletrans.readthedocs.io/en/latest/" title = "Документация библиотеки Googletrans">Telebot</a
+- <a href = "https://py-googletrans.readthedocs.io/en/latest/" title = "Документация библиотеки Googletrans">Goggletrans</a>
