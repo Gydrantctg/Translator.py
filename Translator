@@ -3,7 +3,7 @@ from telebot import types
 from telebot import TeleBot
 import asyncio
 
-tg_token = "7535645689:AAHKu2a51HQVesP9iljvQxQWlqJ0izdxrHY"
+tg_token = ""
 bot = TeleBot(tg_token)
 
 @bot.message_handler(commands=['start'])
@@ -55,9 +55,5 @@ def ru_text(message):
             bot.send_message(message.chat.id, result.text)
 
     asyncio.run(translate_text())
-    
-
-
-
 
 bot.polling()
