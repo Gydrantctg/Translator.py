@@ -12,4 +12,6 @@
 - <a href="https://docs.python.org/3/library/asyncio.html" title="Документация библиотеки Asyncio">Asyncio</a>
 - <a href="https://pypi.org/project/pyTelegramBotAPI/" title="Документация библиотеки 
  Telebot">Telebot</a>
+ - TeleBot
+ - Types
 - <a href = "https://py-googletrans.readthedocs.io/en/latest/" title = "Документация библиотеки Googletrans">Goggletrans</a>
